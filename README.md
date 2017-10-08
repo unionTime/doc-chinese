@@ -84,3 +84,36 @@ var map = L.map('map', {
 |fadeAnimation   |Boolean |true    |淡入淡出动画是否可用。默认在所有支持css# Transitions的浏览器中可用，除了Android|
 |markerZoomAnimation |Boolean |true    |标记是否随地图缩放进行缩放。如果设置为false，当超过动画长度时标记点将会消失。默认在所有支持css# Transitions的浏览器中可用，除了Android|
 |transform3DLimit    |Number  |2^23    |Defines the maximum size of a CSS translation transform. The default value should not be changed unless a web browser positions layers in the wrong place after doing a large panBy|
+
+######Panning Inertia Options
+|Option  |Type    |Default |Description|
+|--------|--------|--------|-----------|
+|inertia |Boolean |*   |If enabled, panning of the map will have an inertia effect where the map builds momentum while dragging and continues moving in the same direction for some time. Feels especially nice on touch devices. Enabled by default unless running on old Android devices.|
+|inertiaDeceleration |Number  |3000    |The rate with which the inertial movement slows down, in pixels/second².|
+|inertiaMaxSpeed |Number  |Infinity    |Max speed of the inertial movement, in pixels/second.|
+|easeLinearity   |Number  |0.2 | |
+|worldCopyJump   |Boolean |false   |With this option enabled, the map tracks when you pan to another "copy" of the world and seamlessly jumps to the original one so that all overlays like markers and vector layers are still visible.|
+|maxBoundsViscosity  |Number  |0.0 |If maxBounds is set, this option will control how solid the bounds are when dragging the map around. The default value of 0.0 allows the user to drag outside the bounds at normal speed, higher values will slow down map dragging outside bounds, and 1.0 makes the bounds fully solid, preventing the user from dragging outside the bounds.|
+
+######键盘导航参数
+|Option  |Type    |Default |Description|
+|--------|--------|--------|-----------|
+|keyboard    |Boolean |true    |允许用户使用键盘和+ —键来使地图获得焦点和导航|
+|keyboardPanDelta    |Number  |80  |当按压箭头键（+、-）移动多少像素|
+
+######鼠标滚轮参数
+|Option  |Type    |Default |Description|
+|--------|--------|--------|-----------|
+|scrollWheelZoom |Boolean或String  |true    |地图是否可以使用鼠标滚轮来缩放。如果传递'center'参数，将会以窗口视图来缩放，而不是鼠标的位置。|
+|wheelDebounceTime   |Number  |40  |Limits the rate at which a wheel can fire (in milliseconds). By default user can't zoom via wheel more often than once per 40 ms|
+|wheelPxPerZoomLevel |Number  |60  |How many scroll pixels (as reported by L.DomEvent.getWheelDelta) mean a change of one full zoom level. Smaller values will make wheel-zooming faster (and vice versa).|
+
+######触屏交互参数
+|Option  |Type    |Default |Description|
+|--------|--------|--------|-----------|
+|tap |Boolean |true    |使支持移动端(ios,adnroid)的 instant taps和touch holds(Z这个在手机的时候触发事件到事件执行的200MS延迟)|
+|tapTolerance    |Number  |15  |The max number of pixels a user can shift his finger during touch for it to be considered a valid tap.|
+|touchZoom   |Boolean或String  |*   |是否允许使用两手指拖拽缩放地图。如果传递参数'center'，将会以窗口视图中心进行缩放，而不是手指的位置。对可以触屏操作的web浏览器有效，除了老旧的Android设备|
+|bounceAtZoomLimits  |Boolean |true    |如果你不想让地图缩放超过最大最小缩放限制和反弹回来，设置为false|
+
+###Events
