@@ -117,3 +117,67 @@ var map = L.map('map', {
 |bounceAtZoomLimits  |Boolean |true    |如果你不想让地图缩放超过最大最小缩放限制和反弹回来，设置为false|
 
 ###Events
+
+######Layer events 图层事件
+|Event   |Data    |Description|
+|--------|--------|-----------|
+|baselayerchange     |[LayersControlEvent](http://leafletjs.com/reference-1.2.0.html#layerscontrolevent)  |当基础图层通过图层控制器[layer control](http://leafletjs.com/reference-1.2.0.html#control-layers)变化时触发.|
+|overlayadd  |[LayersControlEvent](http://leafletjs.com/reference-1.2.0.html#layerscontrolevent)  |当覆盖图层通过图层控制器[layer control](http://leafletjs.com/reference-1.2.0.html#control-layers)选中时触发.|
+|overlayremove   |[LayersControlEvent](http://leafletjs.com/reference-1.2.0.html#layerscontrolevent)  |当覆盖图层通过图层控制器[layer control](http://leafletjs.com/reference-1.2.0.html#control-layers)弃选时触发.|
+|layeradd    |[LayerEvent](http://leafletjs.com/reference-1.2.0.html#layerevent)  |当一个新图层被添加到地图上时触发.|
+|layerremove     |[LayerEvent](http://leafletjs.com/reference-1.2.0.html#layerevent)  |当有一些图层从地图上移除时触发|
+
+######Map state change events 地图状态变换事件
+|Event   |Data    |Description|
+|--------|--------|-----------|
+|zoomlevelschange    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the number of zoomlevels on the map is changed due to adding or removing a layer.|
+|resize  |[ResizeEvent](http://leafletjs.com/reference-1.2.0.html#resizeevent) |Fired when the map is resized.|
+|unload  |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the map is destroyed with remove method.|
+|viewreset   |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the map needs to redraw its content (this usually happens on map zoom or load). Very useful for creating custom overlays.|
+|load    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the map is initialized (when its center and zoom are set for the first time).|
+|zoomstart   |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the map zoom is about to change (e.g. before zoom animation).|
+|movestart   |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the view of the map starts changing (e.g. user starts dragging the map).|
+|zoom    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired repeatedly during any change in zoom level, including zoom and fly animations.|
+|move    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired repeatedly during any movement of the map, including pan and fly animations.|
+|zoomend     |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the map has changed, after any animations.|
+|moveend     |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the center of the map stops changing (e.g. user stopped dragging the map).|
+
+######Popup events 标记点事件
+|Event   |Data    |Description|
+|--------|--------|-----------|
+|popupopen   |[PopupEvent](http://leafletjs.com/reference-1.2.0.html#popupevent)  |当标记在地图上被打开时触发|
+|popupclose  |[PopupEvent](http://leafletjs.com/reference-1.2.0.html#popupevent)  |当标记在地图上被打开时触发|
+|autopanstart    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |当地图开始移动同时标记正在处于opening状态时触发|
+
+######Tooltip events 工具栏事件
+|Event   |Data    |Description|
+|--------|--------|-----------|
+|tooltipopen     |[TooltipEvent](http://leafletjs.com/reference-1.2.0.html#tooltipevent)    |当工具栏在地图上被打开时触发|
+|tooltipclose    |[TooltipEvent](http://leafletjs.com/reference-1.2.0.html#tooltipevent)    |当工具栏在地图上被关闭时触发|
+
+######Location events 位置事件
+|Event   |Data    |Description|
+|--------|--------|-----------|
+|locationerror   |[ErrorEvent](http://leafletjs.com/reference-1.2.0.html#errorevent)  |当调用 geolocation 失败时触发 (using the [locate](http://leafletjs.com/reference-1.2.0.html#map-locate) method)|
+|locationfound   |[LocationEvent](http://leafletjs.com/reference-1.2.0.html#locationevent)   |当调用 geolocation 成功时触发 (using the [locate](http://leafletjs.com/reference-1.2.0.html#map-locate) method)|
+
+######Interaction events 交互事件
+|Event   |Data    |Description|
+|--------|--------|-----------|
+|click   |[MouseEvent](http://leafletjs.com/reference-1.2.0.html#mouseevent)  |当用户点击或者触拍(移动端)时触发|
+|dblclick    |[MouseEvent](http://leafletjs.com/reference-1.2.0.html#mouseevent)  |当用户双击或者双触拍(移动端)时触发|
+|mousedown   |[MouseEvent](http://leafletjs.com/reference-1.2.0.html#mouseevent)  |当用户按下鼠标时出发(未释放)|
+|mouseup     |[MouseEvent](http://leafletjs.com/reference-1.2.0.html#mouseevent)  |当用户释放鼠标时触发|
+|mouseover   |[MouseEvent](http://leafletjs.com/reference-1.2.0.html#mouseevent)  |当鼠标滑进地图时触发|
+|mouseout    |[MouseEvent](http://leafletjs.com/reference-1.2.0.html#mouseevent)  |当鼠标滑出鼠标时触发|
+|mousemove   |[MouseEvent](http://leafletjs.com/reference-1.2.0.html#mouseevent)  |Fired while the mouse moves over the map.|
+|contextmenu |[MouseEvent](http://leafletjs.com/reference-1.2.0.html#mouseevent)  |当用户按下鼠标右键时触发。如果有监听这个事件将会阻止浏览器默认的右键菜单。同时在移动端当用户一只手按住另一只按下时也会触发(也叫长按)|
+|keypress    |[KeyboardEvent](http://leafletjs.com/reference-1.2.0.html#keyboardevent)   |当用户按下键盘同时地图正在获得焦点时将会触发|
+|preclick    |[MouseEvent](http://leafletjs.com/reference-1.2.0.html#mouseevent)  |当用户点击地图时触发 (sometimes useful when you want something to happen on click before any existing click handlers start running).|
+
+######Other Methods(这里应该是其他事件)
+|Event   |Data    |Description|
+|--------|--------|-----------|
+|zoomanim    |[ZoomAnimEvent](http://leafletjs.com/reference-1.2.0.html#zoomanimevent)   |缩放动画每一帧触发|
+
+###Methods 方法
