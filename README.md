@@ -130,17 +130,17 @@ var map = L.map('map', {
 ######Map state change events 地图状态变换事件
 |Event   |Data    |Description|
 |--------|--------|-----------|
-|zoomlevelschange    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the number of zoomlevels on the map is changed due to adding or removing a layer.|
-|resize  |[ResizeEvent](http://leafletjs.com/reference-1.2.0.html#resizeevent) |Fired when the map is resized.|
-|unload  |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the map is destroyed with remove method.|
-|viewreset   |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the map needs to redraw its content (this usually happens on map zoom or load). Very useful for creating custom overlays.|
-|load    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the map is initialized (when its center and zoom are set for the first time).|
-|zoomstart   |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the map zoom is about to change (e.g. before zoom animation).|
-|movestart   |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the view of the map starts changing (e.g. user starts dragging the map).|
-|zoom    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired repeatedly during any change in zoom level, including zoom and fly animations.|
-|move    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired repeatedly during any movement of the map, including pan and fly animations.|
-|zoomend     |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the map has changed, after any animations.|
-|moveend     |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired when the center of the map stops changing (e.g. user stopped dragging the map).|
+|zoomlevelschange    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |当由于增加或删除图层引起的缩放级别变换时触发.|
+|resize  |[ResizeEvent](http://leafletjs.com/reference-1.2.0.html#resizeevent) |当地图大小发生改变时触发|
+|unload  |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired 当地图用[remove](http://leafletjs.com/reference-1.2.0.html#map-remove)方法销毁时触发.|
+|viewreset   |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |当地图由于缩放或者下载需要重绘时触发。在创建自定义图层非常有用。|
+|load    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |当地图被初始化时触发（它的中心点和缩放级别第一次被设置时）.|
+|zoomstart   |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |当地图缩放级别将要发生变化时触发（缩放动画开始之前）.|
+|movestart   |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |当地图窗口视图开始变化时触发（用户开始拖拽地图）.|
+|zoom    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired repeatedly during any change in zoom level, including zoom and fly animations..|
+|move    |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |Fired repeatedly during any change in zoom level, including zoom and fly animations..|
+|zoomend     |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |当地图已经变化完成时触发（在动画结束之后）.|
+|moveend     |[Event](http://leafletjs.com/reference-1.2.0.html#event)   |当地图中心停止变化时触发 (用户停止拖拽地图).|
 
 ######Popup events 标记点事件
 |Event   |Data    |Description|
@@ -181,3 +181,46 @@ var map = L.map('map', {
 |zoomanim    |[ZoomAnimEvent](http://leafletjs.com/reference-1.2.0.html#zoomanimevent)   |缩放动画每一帧触发|
 
 ###Methods 方法
+|Method  |Returns |Description|
+|--------|--------|-----------|
+|getRenderer(<Path> layer)   |Renderer|    
+Returns the instance of Renderer that should be used to render the given Path. It will ensure that the renderer options of the map and paths are respected, and that the renderers do exist on the map.|
+
+######Methods for Layers and Controls 图层和控制器（部件）方法
+|Method  |Returns |Description|
+|--------|--------|-----------|
+|addControl(<Control> control)   |this    |Adds the given control to the map|
+|removeControl(<Control> control)    |this    |Removes the given control from the map|
+|addLayer(<Layer> layer) |this    |Adds the given layer to the map|
+|removeLayer(<Layer> layer)  |this    |Removes the given layer from the map.|
+|hasLayer(<Layer> layer) |Boolean |Returns true if the given layer is currently added to the map|
+|eachLayer(<Function> fn, <Object> context?) |this    |Iterates over the layers of the map, optionally specifying context of the iterator function.|
+|openPopup(<String|HTMLElement> content, <LatLng> latlng, <Popup options> options?) |this    |Creates a popup with the specified content and options and opens it in the given point on a map.|
+|closePopup(<Popup> popup?)  |this    |Closes the popup previously opened with openPopup (or the given one).|
+|openTooltip(<Tooltip> tooltip)  |this    |Opens the specified tooltip.|
+|openTooltip(<String|HTMLElement> content, <LatLng> latlng, <Tooltip options> options?) this    |Creates a tooltip with the specified content and options and open it.|
+|closeTooltip(<Tooltip> tooltip?)    |this    |Closes the tooltip given as parameter.|
+|openPopup(<Popup> popup)    |this |Opens the specified popup while closing the previously opened (to make sure only one is opened at one time for usability).|
+
+######Methods for modifying map state
+|Method  |Returns |Description|
+|--------|--------|-----------|
+|setView(<LatLng> center, <Number> zoom, <Zoom/pan options> options?)    |this    |Sets the view of the map (geographical center and zoom) with the given animation options.|
+|setZoom(<Number> zoom, <Zoom/pan options> options?) |this    |Sets the zoom of the map.|
+|zoomIn(<Number> delta?, <Zoom options> options?)    |this    |Increases the zoom of the map by delta (zoomDelta by default).|
+|zoomOut(<Number> delta?, <Zoom options> options?)   |this    |Decreases the zoom of the map by delta (zoomDelta by default).|
+|setZoomAround(<LatLng> latlng, <Number> zoom, <Zoom options> options)  |this    |Zooms the map while keeping a specified geographical point on the map stationary (e.g. used internally for scroll zoom and double-click zoom).
+|setZoomAround(<Point> offset, <Number> zoom, <Zoom options> options)  |this    |Zooms the map while keeping a specified pixel on the map (relative to the top-left corner) stationary.|
+|fitBounds(<LatLngBounds> bounds, <fitBounds options> options?)  |this    |Sets a map view that contains the given geographical bounds with the maximum zoom level possible.|
+|fitWorld(<fitBounds options> options?)  |this    |Sets a map view that mostly contains the whole world with the maximum zoom level possible.|
+|panTo(<LatLng> latlng, <Pan options> options?)  |this    |Pans the map to a given center.|
+|panBy(<Point> offset, <Pan options> options?)   |this    |Pans the map by a given number of pixels (animated).|
+|flyTo(<LatLng> latlng, <Number> zoom?, <Zoom/pan options> options?)|this |   Sets the view of the map (geographical center and zoom) performing a smooth pan-zoom animation.|
+|flyToBounds(<LatLngBounds> bounds, <fitBounds options> options?)    |this   | Sets the view of the map with a smooth animation like flyTo, but takes a bounds parameter like fitBounds.|
+|setMaxBounds(<Bounds> bounds)   |this    |Restricts the map view to the given bounds (see the maxBounds option).|
+|setMinZoom(<Number> zoom)   |this    |Sets the lower limit for the available zoom levels (see the minZoom option).|
+|setMaxZoom(<Number> zoom)   |this    |Sets the upper limit for the available zoom levels (see the maxZoom option).|
+|panInsideBounds(<LatLngBounds> bounds, <Pan options> options?)  |this    |Pans the map to the closest view that would lie inside the given bounds (if it's not already), controlling the animation using the options specific, if any.|
+|invalidateSize(<Zoom/Pan options> options)  |this    |Checks if the map container size changed and updates the map if so — call it after you've changed the map size dynamically, also animating pan by default. If options.pan is false, panning will not occur. If options.debounceMoveend is true, it will delay moveend event so that it doesn't happen often even if the method is called many times in a row.|
+|invalidateSize(<Boolean> animate)   |this |   Checks if the map container size changed and updates the map if so — call it after you've changed the map size dynamically, also animating pan by default.|
+|stop()  |this    |Stops the currently running panTo or flyTo animation, if any.|
